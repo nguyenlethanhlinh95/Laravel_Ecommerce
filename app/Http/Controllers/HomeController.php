@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('front.shop');
     }
+
+    public function contact()
+    {
+        return view('front.contact');
+    }
 }

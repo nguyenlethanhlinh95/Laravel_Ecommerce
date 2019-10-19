@@ -25,19 +25,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <p><span>Need help?</span> call us <span class="number">1-22-3456789</span></span></p>
             </div>
             <div class="account_desc">
-                <ul>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="#">Delivery</a></li>
-                    <li><a href="#">Checkout</a></li>
-                    <li><a href="#">My Account</a></li>
-                </ul>
+                @include('layout.partials.topMenu')
             </div>
             <div class="clear"></div>
         </div>
         <div class="header_top">
             <div class="logo">
-                <a href="index.html"><img src="assets/front/images/logo.png" alt="" /></a>
+                <a href="{{ route('index') }}"><img src="assets/front/images/logo.png" alt="" /></a>
             </div>
             <div class="cart">
                 <p>Welcome to our Online Store! <span>Cart:</span><div id="dd" class="wrapper-dropdown-2"> 0 item(s) - $0.00
@@ -77,14 +71,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
         <div class="header_bottom">
             <div class="menu">
-                <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="delivery.html">Delivery</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <div class="clear"></div>
-                </ul>
+                @include('layout.partials.mainMenu')
             </div>
             <div class="search_box">
                 <form>

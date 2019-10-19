@@ -15,9 +15,14 @@
 //    return view('welcome');
 //});
 
-Route::get('/', 'HomeController@index');
+
 
 
 Auth::routes();
-
+/*
+ * Route page
+ * */
+Route::get('/', 'HomeController@index')->name('index');
+Route::get('/shop', 'HomeController@index')->name('shop');
+Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/home', 'HomeController@index')->name('home');
