@@ -29,6 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+//Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::group(['prefix' => 'admin', 'middleware'=>['auth', 'admin']],
     function ()
     {
