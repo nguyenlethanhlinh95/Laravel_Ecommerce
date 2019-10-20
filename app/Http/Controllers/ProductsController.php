@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Mockery\Exception;
 use Illuminate\Support\Facades\Session;
-use PhpParser\Builder\Class_;
-
+//include "../../DAO/ProductDao.php";
 
 class ProductsController extends Controller
 {
@@ -203,28 +203,28 @@ class ProductsController extends Controller
     }
 }
 
-
-class ProductDao extends Product
-{
-    public function getAll()
-    {
-        return Product::paginate(5);
-    }
-
-    public function getDetail($id)
-    {
-        return Product::find($id);
-    }
-
-    public function deleteP($id)
-    {
-        $pro = $this->getDetail($id);
-        if ($pro != null)
-        {
-            $pro->delete();
-            return true;
-        }
-        return false;
-    }
-}
+//
+//class ProductDao
+//{
+//    public function getAll()
+//    {
+//        return Product::paginate(5);
+//    }
+//
+//    public function getDetail($id)
+//    {
+//        return Product::find($id);
+//    }
+//
+//    public function deleteP($id)
+//    {
+//        $pro = $this->getDetail($id);
+//        if ($pro != null)
+//        {
+//            $pro->delete();
+//            return true;
+//        }
+//        return false;
+//    }
+//}
 

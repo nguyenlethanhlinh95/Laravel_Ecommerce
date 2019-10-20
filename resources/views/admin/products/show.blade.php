@@ -67,14 +67,14 @@
                             <br>
                             @if($pro->image != null)
                                 <img class="card-img-top img-fluid" src="{{ 'images/'}}{{ $pro->image }} " style="width:100px; height: 70px" alt="Card image cap">
-                                {{ Form::file('image',array('class' => 'form-control', 'name'=>'image')) }}
+
                             @else
                                 <img class="card-img-top img-fluid" src="{{ 'images/image_null.jpg'}}" style="width:100px; height: 70px" alt="Card image cap">
-                                {{ Form::file('image',array('class' => 'form-control', 'name'=>'image')) }}
+
                             @endif
                         </div>
 
-                        <input type="submit" value="Submit" class="btn btn-primary">
+
                     </div>
                 </div>
             </div>
