@@ -50,12 +50,12 @@
                                             <a href="{{ route('product.create') }}" title="Create">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                             </a> |
-                                            <a href="#" title="Edit">
+                                            <a href="{{ route('product.edit', ['id'=>$pro->id]) }}" title="Edit">
                                                 <i class="fa fa-pencil" aria-hidden="true">
 
                                                 </i>
                                             </a> |
-                                            <a href="#" title="Delete">
+                                            <a href="{{ route('product.show', ['id'=>$pro->id]) }}" title="Delete">
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                             </a>
                                         </td>

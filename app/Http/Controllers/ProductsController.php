@@ -7,6 +7,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use Mockery\Exception;
 use Illuminate\Support\Facades\Session;
+use PhpParser\Builder\Class_;
 
 
 class ProductsController extends Controller
@@ -16,15 +17,15 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public $product;
+    public  $product;
     public function __construct()
     {
-        $this->product = new Product();
+        $this->product = new ProductDao();
     }
 
     public function index()
     {
-        $listAll = Product::paginate(5);
+        $listAll = $this->product->getAll();
         return view('admin.products.index', ['products'=>$listAll]);
     }
 
@@ -93,6 +94,8 @@ class ProductsController extends Controller
     public function show($id)
     {
         //
+        $pro = $this->product->getDetail($id);
+        return view('admin.products.show', ['pro' => $pro]);
     }
 
     /**
@@ -104,6 +107,16 @@ class ProductsController extends Controller
     public function edit($id)
     {
         //
+        try
+        {
+            $pro = $this->product->getDetail($id);
+            return view('admin.products.detail', ['pro'=>$pro]);
+        }
+        catch (Exception $ex)
+        {
+            return redirect()->route('product.index');
+        }
+
     }
 
     /**
@@ -116,6 +129,48 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try
+        {
+            $formInput = $request->except('image');
+
+            $this->validate($request, [
+                'pro_name' => 'required',
+                'pro_code' => 'required',
+                'pro_price' => 'required',
+                'image'=>'image|mimes:png,jpg,jpeg|max:10000'
+            ]);
+
+            $product = $this->product->getDetail($id);
+            $image = $request->image;
+            if($image){
+                $datetime = date('mdYhis', time());
+                $imageName=$image->getClientOriginalName();
+
+                $Hinh = $datetime. "_" . $imageName;
+                while(file_exists('images' . $Hinh)){
+                    $Hinh = $datetime. "_" . $imageName;
+                }
+                $image->move('images',$Hinh);
+
+                // xoa hinh cu
+                if ($product->image != null)
+                {
+                    unlink( 'images' . $product->image);
+                }
+
+
+                $formInput['image']=$Hinh;
+            }
+
+            $product->update($formInput);
+
+            Session::flash('inf', 'You succesfully updated a product.');
+            return redirect()->back();
+        }
+        catch (Exception $ex)
+        {
+
+        }
     }
 
     /**
@@ -127,5 +182,49 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
+        try{
+            $status =  $this->product->deleteP($id);
+            if ($status)
+            {
+                Session::flash('suc', 'You succesfully Deleted a product.');
+                return redirect()->route('product.index');
+            }
+            else
+            {
+                Session::flash('err', 'You not Deleted a product.');
+                return redirect()->back();
+            }
+        }
+        catch (Exception $ex)
+        {
+            Session::flash('err', 'You not Deleted a product.');
+            return redirect()->back();
+        }
     }
 }
+
+
+class ProductDao extends Product
+{
+    public function getAll()
+    {
+        return Product::paginate(5);
+    }
+
+    public function getDetail($id)
+    {
+        return Product::find($id);
+    }
+
+    public function deleteP($id)
+    {
+        $pro = $this->getDetail($id);
+        if ($pro != null)
+        {
+            $pro->delete();
+            return true;
+        }
+        return false;
+    }
+}
+
