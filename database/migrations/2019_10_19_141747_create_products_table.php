@@ -19,11 +19,11 @@ class CreateProductsTable extends Migration
             $table->string('pro_code');
             $table->string('pro_price');
             $table->string('image')->nullable();
-            $table->string('spl_price');
-//            $table->integer('id_category');
-//            $table->string('description')->nullable;
-//            $table->string('content')->nullable;
-//            $table->integer('id_tag');
+            $table->string('spl_price')->nullable();
+            //$table->integer('id_category');
+            $table->string('description')->nullable();
+            $table->string('content')->nullable();
+            //$table->integer('id_tag');
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script type="text/javascript" src="assets/front/js/move-top.js"></script>
     <script type="text/javascript" src="assets/front/js/easing.js"></script>
     <script type="text/javascript" src="assets/front/js/startstop-slider.js"></script>
+    <base href="{{asset('')}}">
     @yield('css')
 </head>
 <body>
