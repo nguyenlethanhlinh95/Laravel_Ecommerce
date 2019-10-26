@@ -61,7 +61,27 @@
 
     });
 </script>
+<script src="js/toastr.min.js"></script>
+
+
 <a href="#" id="toTop"><span id="toTopHover"> </span></a>
+
+
+<script>
+    @if(Session::has('suc'))
+        toastr.success("{{ Session::get('suc') }}");
+    @endif
+
+    @if(Session::has('inf'))
+        toastr.info("{{ Session::get('inf') }}");
+    @endif
+
+    @if(count($errors) > 0)
+    @foreach($errors->all() as $err)
+        toastr.error("{{ $err }}")
+    @endforeach
+    @endif
+</script>
 
 @yield('js')
 </body>
