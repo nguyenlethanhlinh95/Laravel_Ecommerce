@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 use Illuminate\Support\Facades\Session;
 use PhpParser\Builder\Class_;
@@ -65,9 +66,9 @@ class ProductsController extends Controller
                 $imageName=$image->getClientOriginalName();
 
                 $Hinh = $datetime. "_" . $imageName;
-                while(file_exists('images' . $Hinh)){
-                    $Hinh = $datetime. "_" . $imageName;
-                }
+//                while(file_exists('images' . $Hinh)){
+//                    $Hinh = $datetime. "_" . $imageName;
+//                }
 
                 $image->move('images',$Hinh);
                 $formInput['image']=$Hinh;
@@ -225,6 +226,33 @@ class ProductDao extends Product
             return true;
         }
         return false;
+    }
+
+    public function getNewProduct()
+    {
+        try
+        {
+            $products = DB::table('products')
+                ->OrderBy('created_at', 'desc')
+                ->limit(4)
+                ->get();
+            return $products;
+        }
+        catch (Exception $ex)
+        {
+            $products = null;
+        }
+
+        $products = null;
+
+    }
+
+    public function getProductDetail($id)
+    {
+        $product = DB::table('products')
+                        ->find($id)
+                        ->get();
+        return $product;
     }
 }
 
