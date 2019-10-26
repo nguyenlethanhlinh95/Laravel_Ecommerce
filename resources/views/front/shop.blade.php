@@ -32,7 +32,7 @@
                         <p><span class="rupees">{{ $item->pro_price }} VND</span></p>
                     </div>
                     <div class="add-cart">
-                        <h4><a href="preview.html">Add to Cart</a></h4>
+                        <h4><a href="{{ route('addItemCart', ['id'=>$item->id]) }}">Add to Cart</a></h4>
                     </div>
                     <div class="clear"></div>
                 </div>

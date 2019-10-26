@@ -29,6 +29,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product-detail/{name}-{id}', 'HomeController@productDetail')->name('product_view_detail');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+// Cart
+Route::get('/cart','CartController@index' )->name('cart');
+Route::get('/cart/addItem/{id}', 'CartController@addItem')->name('addItemCart');
+Route::get('/cart/removeItem/{id}', 'CartController@destroy')->name('removeItemCart');
+// End Cart
 //Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::group(['prefix' => 'admin', 'middleware'=>['auth', 'admin']],
     function ()
@@ -40,3 +46,6 @@ Route::group(['prefix' => 'admin', 'middleware'=>['auth', 'admin']],
 
         Route::resource('product', 'ProductsController');
     });
+
+Cart::tax(0, 0, 0);
+

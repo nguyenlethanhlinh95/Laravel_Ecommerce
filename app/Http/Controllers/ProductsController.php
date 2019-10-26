@@ -205,30 +205,6 @@ class ProductsController extends Controller
     }
 }
 
-//
-//class ProductDao
-//{
-//    public function getAll()
-//    {
-//        return Product::paginate(5);
-//    }
-//
-//    public function getDetail($id)
-//    {
-//        return Product::find($id);
-//    }
-//
-//    public function deleteP($id)
-//    {
-//        $pro = $this->getDetail($id);
-//        if ($pro != null)
-//        {
-//            $pro->delete();
-//            return true;
-//        }
-//        return false;
-//    }
-//}
 
 class ProductDao extends Product
 {

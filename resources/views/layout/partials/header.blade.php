@@ -10,14 +10,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <base href="{{asset('')}}">
+    @yield('css')
     <link href="assets/front/css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="assets/front/css/slider.css" rel="stylesheet" type="text/css" media="all"/>
-    <script type="text/javascript" src="assets/front/js/jquery-1.7.2.min.js"></script>
+    <link href="assets/front/css/mystyle.css" rel="stylesheet" type="text/css" media="all"/>
+
+    <script type="text/javascript" src="assets/front/js/jquery.min.js"></script>
     <script type="text/javascript" src="assets/front/js/move-top.js"></script>
     <script type="text/javascript" src="assets/front/js/easing.js"></script>
+    <script type="text/javascript" src="assets/front/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/front/js/startstop-slider.js"></script>
 
-    @yield('css')
+
+
+
 </head>
 <body>
 <div class="wrap">
@@ -36,10 +42,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <a href="{{ route('index') }}"><img src="assets/front/images/logo.png" alt="" /></a>
             </div>
             <div class="cart">
-                <p>Welcome to our Online Store! <span>Cart:</span><div id="dd" class="wrapper-dropdown-2"> 0 item(s) - $0.00
-                    <ul class="dropdown">
-                        <li>you have no items in your Shopping cart</li>
-                    </ul></div></p>
+                @if (Cart::count() > 0)
+                    <p>Welcome to our Online Store! <span><a href="{{ route('cart') }}">Cart:</a></span><div id="dd" class="wrapper-dropdown-2"> {{ Cart::count() }} item(s) - $0.00
+                        <ul class="dropdown">
+                            <li>you have {{ Cart::count() }} items in your Shopping cart</li>
+                        </ul></div></p>
+                    @else
+                    <p>Welcome to our Online Store! <span><a href="{{ route('cart') }}">Cart:</a></span><div id="dd" class="wrapper-dropdown-2"> 0 item(s) - $0.00
+                        <ul class="dropdown">
+                            <li>you have no items in your Shopping cart</li>
+                        </ul></div></p>
+                    @endif
+
             </div>
             <script type="text/javascript">
                 function DropDown(el) {
