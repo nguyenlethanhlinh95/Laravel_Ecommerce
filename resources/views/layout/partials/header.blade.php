@@ -9,13 +9,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <title>Free Home Shoppe Website Template | Home :: w3layouts</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <base href="{{asset('')}}">
     <link href="assets/front/css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="assets/front/css/slider.css" rel="stylesheet" type="text/css" media="all"/>
     <script type="text/javascript" src="assets/front/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="assets/front/js/move-top.js"></script>
     <script type="text/javascript" src="assets/front/js/easing.js"></script>
     <script type="text/javascript" src="assets/front/js/startstop-slider.js"></script>
-    <base href="{{asset('')}}">
+
     @yield('css')
 </head>
 <body>

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\App;
+=======
+use Illuminate\Support\Facades\DB;
+>>>>>>> Re_Nhanh_CRUD
 use Mockery\Exception;
 use Illuminate\Support\Facades\Session;
 //include "../../DAO/ProductDao.php";
@@ -65,9 +69,9 @@ class ProductsController extends Controller
                 $imageName=$image->getClientOriginalName();
 
                 $Hinh = $datetime. "_" . $imageName;
-                while(file_exists('images' . $Hinh)){
-                    $Hinh = $datetime. "_" . $imageName;
-                }
+//                while(file_exists('images' . $Hinh)){
+//                    $Hinh = $datetime. "_" . $imageName;
+//                }
 
                 $image->move('images',$Hinh);
                 $formInput['image']=$Hinh;
@@ -203,6 +207,7 @@ class ProductsController extends Controller
     }
 }
 
+<<<<<<< HEAD
 //
 //class ProductDao
 //{
@@ -227,4 +232,57 @@ class ProductsController extends Controller
 //        return false;
 //    }
 //}
+=======
+
+class ProductDao extends Product
+{
+    public function getAll()
+    {
+        return Product::paginate(5);
+    }
+
+    public function getDetail($id)
+    {
+        return Product::find($id);
+    }
+
+    public function deleteP($id)
+    {
+        $pro = $this->getDetail($id);
+        if ($pro != null)
+        {
+            $pro->delete();
+            return true;
+        }
+        return false;
+    }
+
+    public function getNewProduct()
+    {
+        try
+        {
+            $products = DB::table('products')
+                ->OrderBy('created_at', 'desc')
+                ->limit(4)
+                ->get();
+            return $products;
+        }
+        catch (Exception $ex)
+        {
+            $products = null;
+        }
+
+        $products = null;
+
+    }
+
+    public function getProductDetail($id)
+    {
+        $product = DB::table('products')
+                        ->find($id)
+                        ->get();
+        return $product;
+    }
+}
+>>>>>>> Re_Nhanh_CRUD
 
