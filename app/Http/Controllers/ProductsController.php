@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
+
 use Illuminate\Support\Facades\App;
-=======
 use Illuminate\Support\Facades\DB;
->>>>>>> Re_Nhanh_CRUD
 use Mockery\Exception;
 use Illuminate\Support\Facades\Session;
 //include "../../DAO/ProductDao.php";
@@ -207,7 +205,6 @@ class ProductsController extends Controller
     }
 }
 
-<<<<<<< HEAD
 //
 //class ProductDao
 //{
@@ -232,7 +229,6 @@ class ProductsController extends Controller
 //        return false;
 //    }
 //}
-=======
 
 class ProductDao extends Product
 {
@@ -284,5 +280,5 @@ class ProductDao extends Product
         return $product;
     }
 }
->>>>>>> Re_Nhanh_CRUD
+
 

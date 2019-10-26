@@ -26,7 +26,7 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/shop', 'HomeController@index')->name('shop');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/detail/{id}', 'HomeController@productDetail')->name('product_view_detail');
+Route::get('/product-detail/{name}-{id}', 'HomeController@productDetail')->name('product_view_detail');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 //Route::post('auth/login', 'Auth\AuthController@postLogin');

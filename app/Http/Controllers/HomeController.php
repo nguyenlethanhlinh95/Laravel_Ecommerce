@@ -44,7 +44,7 @@ class HomeController extends Controller
 
     }
 
-    public function productDetail($id)
+    public function productDetail($name, $id)
     {
         try{
             $product = $this->proDao->getDetail($id);
