@@ -14,7 +14,7 @@
                     <tbody>
 
                     @foreach($cartItems as $item)
-                        <tr>
+                        <tr id="{{ $item->rowId }}">
                             <td class="image">
                                 <img src="{{ asset('images/'. $item->options->img) }}" alt=""></td>
                             <td>
@@ -23,7 +23,7 @@
                             </td>
                             <td>
                                 <div class="pdt-40">
-                                    <input type="number" value="{{ $item->qty }}">
+                                    <input class="cartItemEvent" data-productID="{{ $item->id }}" data-rowID="{{ $item->rowId }}" type="number" min="1" max="1000" value="{{ $item->qty }}"   />
 
                                     <br><br>
                                     <p class=""><a href="{{ route('removeItemCart', ['id'=> $item->rowId]) }}">Remove</a></p>
@@ -33,7 +33,7 @@
                             </td>
                             <td>
                                 <div class="pdt-40">
-                                    <span class="bold">{{ $item->subtotal }} VND</span>
+                                    <span class="bold total_price_item">{{ $item->subtotal }} VND</span>
                                 </div>
                             </td>
                         </tr>
@@ -55,7 +55,7 @@
                                                 </span>
                         </div>
                         <div class="col-md-5">
-                                                <span class="price bold">
+                                                <span class="price bold" id="subtotal">
                                                         {{ Cart::subtotal() }} VND
                                                 </span>
                         </div>
@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-md-5">
 
-                                            <span class="price bold">
+                                            <span class="price bold" id="tax">
 
                                                 {{ Cart::tax() }} VND
                                             </span>
@@ -85,13 +85,13 @@
 
                     <div class="row">
                         <div class="col-md-7">
-                                            <span class="label bold">
+                                            <span class="label bold" >
                                                     Total:
                                             </span>
                         </div>
                         <div class="col-md-5">
 
-                                            <span class="price bold">
+                                            <span class="price bold" id="total">
 
                                                 {{ Cart::total() }} VND
                                             </span>
@@ -107,4 +107,53 @@
             <!-- end sidebarcar -->
         </div>
     </div>
+@stop
+
+
+
+@section('js')
+
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('.cartItemEvent').change(function () {
+
+                var value = $(this).val();
+                if (value>0)
+                {
+                    var rowId = $(this).attr('data-rowID');
+                    var proId = $(this).attr('data-productID');
+                    $.ajax({
+                        type: 'post',
+                        dataType: 'json',
+                        url: '{{ route('updateItemCart') }}',
+
+                        //data: "qty=" + value + "& rowId=" + rowId + "& proId=" + proId,
+                        data: { qty: value, rowId:rowId,  proId: proId},
+                        success: function (response) {
+                            var data = response.data;
+                            var totalItem = data['qty'] * data['price'];
+                            var totalListItems = response.total;
+                            var subtotal = response.subtotal;
+                            var tax = response.tax;
+
+                            $('#'+ data['rowId'] +' .total_price_item').text(totalItem + " VND");
+                            $('#total').text(totalListItems + " VND");
+                            $('#tax').text(tax + " VND");
+                            $('#subtotal').text(subtotal + " VND");
+                        }
+                    });
+                }
+                else
+                {
+                    alert('Quantity > 0 ');
+                }
+            })
+        });
+    </script>
+
 @stop

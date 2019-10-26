@@ -58,9 +58,28 @@ class CartController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $input = $request->all();
+        $qty = $input['qty'];
+        $rowId = $input['rowId'];
 
+        $boolUpdateItem = $this->cartDao->boolCartUpdateItem($rowId,$qty);
+
+        if ($boolUpdateItem)
+        {
+            $cartItem = $this->cartDao->getCartItem($rowId);
+            $total = $this->cartDao->getTotal();
+            $tax = $this->cartDao->getTax();
+            $subtotal = $this->cartDao->getSubTotal();
+
+            return response()->json(['data'=>$cartItem, 'total'=> $total, 'tax'=>$tax, 'subtotal' => $subtotal], 200);
+        }
+        else
+        {
+            Session::flash('err', 'You can\'t update this product.');
+            return back();
+        }
     }
 
 }
@@ -118,4 +137,62 @@ class CartDao
         }
     }
 
+    public function boolCartUpdateItem($rowId, $qty)
+    {
+        try{
+            Cart::update($rowId, $qty);
+            return true;
+        }
+        catch (Exception $ex)
+        {
+            return false;
+        }
+    }
+
+    public function getCartItem($id)
+    {
+        try
+        {
+            return Cart::get($id);
+        }
+        catch (Exception $ex)
+        {
+
+        }
+
+    }
+
+    public function getSubTotal()
+    {
+        try{
+            return Cart::subtotal();
+
+        }
+        catch (Exception $ex)
+        {
+
+        }
+    }
+
+    public function getTax()
+    {
+        try{
+            return Cart::tax();
+        }
+        catch (Exception $ex)
+        {
+
+        }
+    }
+
+    public function getTotal()
+    {
+        try{
+            return Cart::total();
+        }
+        catch (Exception $ex)
+        {
+
+        }
+    }
 }

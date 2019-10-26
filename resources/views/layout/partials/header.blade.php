@@ -10,6 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <base href="{{asset('')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     @yield('css')
     <link href="assets/front/css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="assets/front/css/slider.css" rel="stylesheet" type="text/css" media="all"/>
@@ -44,7 +45,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
             <div class="cart">
                 @if (Cart::count() > 0)
-                    <p>Welcome to our Online Store! <span><a href="{{ route('cart') }}">Cart:</a></span><div id="dd" class="wrapper-dropdown-2"> {{ Cart::count() }} item(s) - $0.00
+                    <p>Welcome to our Online Store! <span><a href="{{ route('cart') }}">Cart:</a></span><div id="dd" class="wrapper-dropdown-2"> {{ Cart::count() }} item(s) - {{ Cart::total() . 'VND' }}
                         <ul class="dropdown">
                             <li>you have {{ Cart::count() }} items in your Shopping cart</li>
                         </ul></div></p>

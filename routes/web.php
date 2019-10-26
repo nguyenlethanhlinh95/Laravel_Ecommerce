@@ -34,6 +34,9 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/cart','CartController@index' )->name('cart');
 Route::get('/cart/addItem/{id}', 'CartController@addItem')->name('addItemCart');
 Route::get('/cart/removeItem/{id}', 'CartController@destroy')->name('removeItemCart');
+
+Route::post('/cart/updateItem', 'CartController@update')->name('updateItemCart');
+
 // End Cart
 //Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::group(['prefix' => 'admin', 'middleware'=>['auth', 'admin']],
@@ -47,5 +50,4 @@ Route::group(['prefix' => 'admin', 'middleware'=>['auth', 'admin']],
         Route::resource('product', 'ProductsController');
     });
 
-Cart::tax(0, 0, 0);
 
