@@ -82,7 +82,7 @@
 
     <!-- Core CSS - Include with every page -->
     <link href="assets/admin/css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="assets/admin/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="assets/admin/css/sb-admin.css" rel="stylesheet">

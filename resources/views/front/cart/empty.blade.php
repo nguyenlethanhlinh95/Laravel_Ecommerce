@@ -10,7 +10,7 @@
             <div class="text-center">
                 <img src="{{ asset('images/emptycart.png') }}" alt="">
 
-                <h5 class="bold">Sorry !! You're cart empty.</h5>
+                <h5 class="bold">Sorry !! Cart you empty.</h5>
                 <br>
                 <h5><a href="{{ route('home') }}">Back to Homepage</a></h5>
             </div>

@@ -34,6 +34,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/cart','CartController@index' )->name('cart');
 Route::get('/cart/addItem/{id}', 'CartController@addItem')->name('addItemCart');
 Route::get('/cart/removeItem/{id}', 'CartController@destroy')->name('removeItemCart');
+Route::get('/checkout', 'CheckoutController@index')->name('checkout');
 
 Route::post('/cart/updateItem', 'CartController@update')->name('updateItemCart');
 

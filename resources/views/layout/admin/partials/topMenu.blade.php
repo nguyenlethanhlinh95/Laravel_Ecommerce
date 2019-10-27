@@ -196,6 +196,10 @@
         <ul class="dropdown-menu dropdown-user">
             <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
             </li>
+
+            <li><a href="{{ route('home') }}"><i class="fa fa-fast-forward fa-fw"></i> View Website</a>
+            </li>
+
             <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
             </li>
             <li class="divider"></li>

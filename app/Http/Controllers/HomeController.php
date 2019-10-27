@@ -39,7 +39,7 @@ class HomeController extends Controller
         }
         catch (\Exception $e)
         {
-            return view('front.shop');
+            return abort(404);
         }
 
     }
@@ -60,7 +60,8 @@ class HomeController extends Controller
         catch (\Exception $e)
         {
             //$errors = $e->getMessage();
-            return view('front.404');
+            return abort(404);
+
 
         }
 

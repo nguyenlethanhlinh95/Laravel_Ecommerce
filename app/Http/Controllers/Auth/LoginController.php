@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Mockery\Exception;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -70,17 +72,41 @@ class LoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        if( Auth::attempt(['email' => $email, 'password' =>$password])) {
-            if (Auth::user()->isAdmin())
-            {
 
-                return redirect()->route('admin.index');
+        try
+        {
+            if( Auth::attempt(['email' => $email, 'password' =>$password])) {
+
+                $boolCheckOut = session('checkout');
+
+                if ($boolCheckOut)
+                {
+                    return view('front.cart.checkout');
+
+
+                }
+                else
+                {
+                    if (Auth::user()->isAdmin())
+                    {
+
+                        return redirect()->route('admin.index');
+                    }
+                    return redirect()->route('home');
+                }
+
+
+            } else {
+                $errors = new MessageBag(['errorlogin' => 'Email hoặc mật khẩu không đúng']);
+                return redirect()->back()->withInput()->withErrors($errors);
             }
-            return redirect()->route('home');
-        } else {
-            $errors = new MessageBag(['errorlogin' => 'Email hoặc mật khẩu không đúng']);
-            return redirect()->back()->withInput()->withErrors($errors);
         }
+        catch (Exception $ex)
+        {
+            return abort(404);
+
+        }
+
 
     }
 }

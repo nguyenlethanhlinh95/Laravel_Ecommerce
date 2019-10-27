@@ -38,7 +38,8 @@
     font-size: 22px;
     font-family: 'Times New Roman', Times, serif; }
 
-.button_wapper button {
-  width: 100%; }
+.button_wapper a {
+  width: 100%;
+  display: block; }
 
 /*# sourceMappingURL=mystyle.css.map */
