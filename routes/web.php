@@ -16,15 +16,18 @@
 //});
 
 
+//use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Route;
 
-
-Auth::routes();
+//Auth::routes();
 /*
  * Route page
  * */
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('/test', 'HomeController@index')->name('test');
 Route::get('/shop', 'HomeController@index')->name('shop');
 Route::get('/contact', 'HomeController@contact')->name('contact');
+//Route::get('/contact', function(){ echo "123"; })->name('contact');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product-detail/{name}-{id}', 'HomeController@productDetail')->name('product_view_detail');
 
