@@ -76,14 +76,14 @@
         toastr.info("{{ Session::get('inf') }}");
     @endif
 
-    @if(count($errors) > 0)
-    @foreach($errors->all() as $err)
-        toastr.error("{{ $err }}")
-    @endforeach
-    @endif
+    {{--@if(count($errors) > 0)--}}
+    {{--@foreach($errors->all() as $err)--}}
+        {{--toastr.error("{{ $err }}")--}}
+    {{--@endforeach--}}
+    {{--@endif--}}
 </script>
 
-@yield('js')
+@yield('js')-->
 </body>
 </html>
 
