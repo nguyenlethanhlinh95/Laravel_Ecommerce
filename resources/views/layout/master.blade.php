@@ -3,7 +3,7 @@
 
 <div class="header_slide">
     <?php
-    $routeName = Route::current()->getName();
+    $routeName = Route::currentRouteName();
     ?>
     @if ($routeName == 'home' ||  $routeName == 'index' || $routeName == 'shop')
 
